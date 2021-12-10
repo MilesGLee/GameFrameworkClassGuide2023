@@ -36,8 +36,6 @@ public:
     /// the scene is null</returns>
     static int addScene(Scene* scene);
 
-    static void addActorToDeletionList(Actor* actor);
-
     /// <summary>
     /// Finds the instance of the scene given that inside of the array
     /// and removes it
@@ -74,7 +72,6 @@ public:
     /// <param name="actor">The actor that will be deleted.</param>
     static void destroy(Actor* actor);
 
-    void destroyActorsInList();
 
     /// <summary>
     /// Ends the application and closes the window.
@@ -100,6 +97,9 @@ public:
     void run();
 
 private:
+
+    static void addActorToDeletionList(Actor* actor);
+    void destroyActorsInList();
     void start();
     void update(float delaTime);
     void draw();
