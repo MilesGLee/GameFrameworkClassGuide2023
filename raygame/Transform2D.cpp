@@ -278,9 +278,13 @@ void Transform2D::updateTransforms()
     //If the transform has a parent...
     if (m_parent)
         //...set the global matrix to be the parent global combined with the local
-        *m_globalMatrix = *(m_parent->m_globalMatrix) * (*m_localMatrix);
+        *m_globalMatrix = *(m_parent->getGlobalMatrix()) * (*m_localMatrix);
     //Otherwise...
     else
         //...set the global to be the local
         *m_globalMatrix = *m_localMatrix;
+
+    //Tell all children to update transforms
+    for (int i = 0; i < m_childCount; i++)
+        m_children[i]->m_shouldUpdateTransforms = true;
 }
