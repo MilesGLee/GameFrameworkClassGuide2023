@@ -24,7 +24,6 @@ public:
     /// <param name="value">The value to set the forward to</param>
     void setForward(MathLibrary::Vector2 value);
 
-
     /// <returns>A vector representing the position of the object in the world.</returns>
     MathLibrary::Vector2 getWorldPosition();
 
