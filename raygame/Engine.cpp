@@ -193,6 +193,9 @@ void Engine::setCurrentScene(int index)
 
 	//Update the current scene index
 	m_currentSceneIndex = index;
+
+	//Start the new scene
+	m_scenes[m_currentSceneIndex]->start();
 }
 
 bool Engine::getKeyDown(int key)
