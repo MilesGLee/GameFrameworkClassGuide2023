@@ -62,44 +62,40 @@ public:
     /// <summary>
     /// Returns true while if key was pressed once
     /// </summary>
-    /// <param name="key">The ascii value of the key to check</param>
+    /// <param name="key"> The ascii value of the key to check. </param>
     /// <returns></returns>
     static bool getKeyPressed(int key);
 
     /// <summary>
     /// Removes the actor from the scene, removes it from its parent, calls its end function, and deletes the actor.
     /// </summary>
-    /// <param name="actor">The actor that will be deleted.</param>
+    /// <param name="actor"> The actor that will be deleted. </param>
     static void destroy(Actor* actor);
-
 
     /// <summary>
     /// Ends the application and closes the window.
     /// </summary>
     static void CloseApplication();
 
-    /// <returns>The world matrix of the current scene.</returns>
+    /// <returns> The world matrix of the current scene. </returns>
     static MathLibrary::Matrix3* getWorld();
 
     /// <summary>
-    /// Gets how wide the application window is
+    /// Gets how wide the application window is.
     /// </summary>
     static int getScreenWidth() { return m_screenWidth; }
 
     /// <summary>
-    /// Gets how tall the application window is
+    /// Gets how tall the application window is.
     /// </summary>
     static int getScreenHeight() { return m_screenHeight; }
 
     /// <summary>
-    /// Begins the application
+    /// Begins the application.
     /// </summary>
     void run();
 
 private:
-
-    static void addActorToDeletionList(Actor* actor);
-    void destroyActorsInList();
     void start();
     void update(float delaTime);
     void draw();
@@ -110,7 +106,6 @@ private:
     static bool m_applicationShouldClose;
     static Scene** m_scenes;
     static int m_sceneCount;
-    static ActorArray m_actorsToDelete;
     static int m_currentSceneIndex;
     static const int m_screenWidth = 700;
     static const int m_screenHeight = 800;

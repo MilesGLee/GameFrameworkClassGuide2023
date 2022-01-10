@@ -54,7 +54,15 @@ public:
     /// <returns>False if the actor is a nullptr or isn't in the array.</returns>
     bool removeActor(Actor* actor);
 
+    /// <summary>
+    /// Removes the actor from the scene, removes it from its parent, calls its end function, and deletes the actor.
+    /// </summary>
+    /// <param name="actor"> The actor that will be deleted. </param>
+    static void destroy(Actor* actor);
 
+    Actor* getActor(int index);
+
+    ActorArray getActors() { return m_actors; }
 
     virtual void start();
 
@@ -67,6 +75,11 @@ public:
     virtual void end();
 
 private:
+    // Don't Touch
+    static void addActorToDeletionList(Actor* actor);
+    void destroyActorsInList();
+
+    static ActorArray m_actorsToDelete;
     ActorArray m_actors;
     ActorArray m_UIElements;
     MathLibrary::Matrix3* m_world;

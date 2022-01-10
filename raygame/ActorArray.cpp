@@ -20,7 +20,7 @@ void ActorArray::addActor(Actor* actor)
 bool ActorArray::removeActor(Actor* actor)
 {
     //Check to see if the actor was null
-    if (!actor)
+    if (!actor || m_actorCount <= 0)
     {
         return false;
     }

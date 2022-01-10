@@ -1,5 +1,9 @@
 #include "Scene.h"
 #include "Transform2D.h"
+#include <string.h>
+#include "Engine.h"
+
+ActorArray Scene::m_actorsToDelete = ActorArray();
 
 Scene::Scene()
 {
@@ -55,6 +59,55 @@ bool Scene::removeActor(Actor* actor)
     return m_actors.removeActor(actor);
 }
 
+void Scene::addActorToDeletionList(Actor* actor)
+{
+    //return if the actor is already going to be deleted
+    if (m_actorsToDelete.contains(actor))
+        return;
+
+    //Add actor to deletion list
+    m_actorsToDelete.addActor(actor);
+
+    //Add all the actors children to the deletion list
+    for (int i = 0; i < actor->getTransform()->getChildCount(); i++)
+    {
+        m_actorsToDelete.addActor(actor->getTransform()->getChildren()[i]->getOwner());
+    }
+}
+
+void Scene::destroy(Actor* actor)
+{
+    addActorToDeletionList(actor);
+}
+
+void Scene::destroyActorsInList()
+{
+    //Iterate through deletion list
+    for (int i = 0; i < m_actorsToDelete.getLength(); i++)
+    {
+        //Remove actor from the scene
+        Actor* actorToDelete = m_actorsToDelete.getActor(i);
+        if (!removeActor(actorToDelete))
+            removeUIElement(actorToDelete);
+
+        //Call actors clean up functions
+        actorToDelete->end();
+        actorToDelete->onDestroy();
+
+        //Delete the actor
+        delete actorToDelete;
+    }
+
+    //Clear the array
+    m_actorsToDelete = ActorArray();
+}
+
+
+Actor* Scene::getActor(int index)
+{
+    return m_actors.getActor(index);
+}
+
 void Scene::start()
 {
     m_started = true;
@@ -62,6 +115,9 @@ void Scene::start()
 
 void Scene::update(float deltaTime)
 {
+    //Clean up actors marked for destruction
+    destroyActorsInList();
+
     //Updates all actors
     for (int i = 0; i < m_actors.getLength(); i++)
     {
