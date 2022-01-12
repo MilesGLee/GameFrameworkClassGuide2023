@@ -71,7 +71,7 @@ void Scene::addActorToDeletionList(Actor* actor)
     //Add all the actors children to the deletion list
     for (int i = 0; i < actor->getTransform()->getChildCount(); i++)
     {
-        m_actorsToDelete.addActor(actor->getTransform()->getChildren()[i]->getOwner());
+        addActorToDeletionList(actor->getTransform()->getChildren()[i]->getOwner());
     }
 }
 
@@ -91,6 +91,11 @@ void Scene::destroyActorsInList()
             removeUIElement(actorToDelete);
 
         //Call actors clean up functions
+
+
+        for (int i = 0; i < actorToDelete->getTransform()->getChildCount(); i++)
+            actorToDelete->getTransform()->getChildren()[i]->setParent(actorToDelete->getTransform()->getParent());
+
         actorToDelete->end();
         actorToDelete->onDestroy();
 

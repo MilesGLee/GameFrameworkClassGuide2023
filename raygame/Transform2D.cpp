@@ -10,6 +10,7 @@ Transform2D::Transform2D(Actor* owner)
     m_rotation = new MathLibrary::Matrix3();
     m_scale = new MathLibrary::Matrix3();
     m_children = nullptr;
+    m_parent = nullptr;
     m_owner = owner;
 }
 
@@ -20,6 +21,8 @@ Transform2D::~Transform2D()
     delete m_rotation;
     delete m_translation;
     delete m_scale;
+
+
     delete[] m_children;
 }
 
@@ -87,6 +90,12 @@ void Transform2D::setLocalPosition(MathLibrary::Vector2 value)
     m_shouldUpdateTransforms = true;
 }
 
+void Transform2D::setParent(Transform2D* parent)
+{
+    m_parent = parent;
+    m_shouldUpdateTransforms = true;
+}
+
 void Transform2D::addChild(Transform2D* child)
 {
     //Create a new array with a size one greater than our old array
@@ -145,7 +154,7 @@ bool Transform2D::removeChild(int index)
 bool Transform2D::removeChild(Transform2D* child)
 {
     //Check to see if the actor was null
-    if (!child)
+    if (!child || m_childCount <= 0)
     {
         return false;
     }

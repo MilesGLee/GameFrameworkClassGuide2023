@@ -46,6 +46,9 @@ public:
     /// <returns>A pointer to the transform that has been set as this transforms parent.</returns>
     Transform2D* getParent() { return m_parent; }
 
+    /// <returns>Sets the parent of this transform.</return
+    void setParent(Transform2D* parent);
+
     /// <summary>
     /// Sets this transform as the given transforms parent so that their matrices are concatenated for following updates.
     /// </summary>
