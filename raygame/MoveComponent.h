@@ -6,7 +6,7 @@ class MoveComponent :
 	public Component
 {
 public:
-	MoveComponent(const char* name = "MoveComponent") : Component::Component(name) {}
+	MoveComponent() : Component::Component() {}
 
 	/// <summary>
 	/// Get the current speed and direction of this actor
