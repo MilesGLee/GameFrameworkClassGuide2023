@@ -11,9 +11,9 @@ Enemy::Enemy(float x, float y, const char* name, float speed, int maxHealth, Act
 
 void Enemy::start()
 {
-	m_moveComponent = dynamic_cast<MoveComponent*>(addComponent(new MoveComponent()));
+	/*m_moveComponent = dynamic_cast<MoveComponent*>(addComponent(new MoveComponent()));
 	SpriteComponent* spriteComponent = new SpriteComponent("Images/player.png");
-	addComponent(spriteComponent);
+	addComponent(spriteComponent);*/
 
 	Actor::start();
 }
