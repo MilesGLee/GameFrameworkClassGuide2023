@@ -62,6 +62,10 @@ public:
     T* addComponent();
 
     Component* addComponent(Component* component);
+
+    //Called when a new component is added to the actor
+    virtual void onAddComponent(Component* component);
+
     /// <summary>
     /// Removes the first instance found that matches the component reference
     /// </summary>
@@ -172,6 +176,8 @@ inline T* Actor::addComponent()
 
     m_components = appendedArray;
     m_componentCount++;
+
+    onAddComponent(component);
 
     return (T*)component;
 }

@@ -1,6 +1,9 @@
 #pragma once
-class SeekComponent
-{
+#include "SteeringComponent.h"
 
+class SeekComponent : public SteeringComponent 
+{
+public:
+	MathLibrary::Vector2 calculateForce() override;
 };
 

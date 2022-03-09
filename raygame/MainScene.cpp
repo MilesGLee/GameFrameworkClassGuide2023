@@ -1,24 +1,26 @@
 #include "MainScene.h"
 #include "SpriteComponent.h"
 #include "MoveComponent.h"
+#include "SeekComponent.h"
 #include "Transform2D.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "SeekComponent.h"
+#include "Agent.h"
 
 void MainScene::start()
 {
 	Player* player = new Player(50, 50, "Player");
-	player->getTransform()->setScale({ 50,50 });
+	player->getTransform()->setScale({50, 50});
 	player->addComponent(new SpriteComponent("Images/player.png"));
 	MoveComponent* playerMove = player->addComponent<MoveComponent>();
 
-	//playerMove->setVelocity({ 1,1 });
+	Agent* agent = new Agent();
+	agent->getTransform()->setScale({50, 50});
+	agent->setMaxForce(50);
+	agent->addComponent(new SpriteComponent("Images/enemy.png"));
+	SeekComponent* comp = new SeekComponent();
+	comp->setTarget(player);
+	agent->addComponent(comp);
 	addActor(player);
-
-	Enemy* enemy = new Enemy(0, 0, "Enemy", 1, 10, player);
-	enemy->getTransform()->setScale({50, 50});
-	enemy->addComponent(new SpriteComponent("Images/player.png"));
-	MoveComponent* enemyMove = enemy->addComponent<MoveComponent>();
-
-	addActor(enemy);
+	addActor(agent);
 }
