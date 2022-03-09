@@ -71,6 +71,9 @@
     <ClCompile Include="SteeringComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="WanderComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -125,6 +128,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="SteeringComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
